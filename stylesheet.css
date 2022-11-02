@@ -325,9 +325,6 @@ color: red;
 	width:200px;
 	float:left;
 }
-#builtInSeed {
-	width:35px;
-}
 #inputConfig2{
 	width:200px;
 	float:left;
@@ -647,6 +644,9 @@ color: red;
 	margin-top:3px;
     background-color : #181818; 
     color: white;
+}
+#builtInSeed {
+	width:35px;
 }
 .mark_spawn {
 	width: 55px;

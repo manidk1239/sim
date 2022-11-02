@@ -1,10 +1,20 @@
+function simControl() {
+    if (!document.getElementById("builtInSeed").value > 0) {document.getElementById('fileInput').click(); return;}
+    fetch('./sim_seeds/seed' + document.getElementById("builtInSeed").value + '.json')
+        .then((response) => response.json())
+        .then((data) => {
+            readLog(data);
+        })
+}
 function onFileLoad(elementId, event) {
-    SpoilerJSON = JSON.parse(event.target.result);
+	readLog(JSON.parse(event.target.result));
+}
+function readLog(SpoilerJSON) {
     simActive = true;
 	
 	document.getElementById("simLog").style.display = "inline-block";
 	document.getElementById("simLog").value = "Starting with " + SpoilerJSON["locations"]["Song from Impa"] + " and " + SpoilerJSON["locations"]["Links Pocket"] + "\n";
-	document.getElementById("simCheckPedestal").style.display = "block";
+	document.getElementById("simCheckAltar").style.display = "block";
 	document.getElementById("simCheckChildSpawn").style.display = "block";
 	document.getElementById("simCheckAdultSpawn").style.display = "block";
 	document.getElementById("gossips").value = "ON";
@@ -23,39 +33,6 @@ function onFileLoad(elementId, event) {
 	document.getElementById("zeldasSpot").value = SpoilerItemToInput[SpoilerJSON["locations"]["Song from Impa"]];
 	simStartingReward();
 }
-function simControl() {
-    console.log('./sim_seeds/seed' + document.getElementById("builtInSeed").value + '.json')
-    if (!document.getElementById("builtInSeed").value > 0) {document.getElementById('fileInput').click(); return;}
-    console.log('./sim_seeds/seed' + document.getElementById("builtInSeed").value + '.json')
-    fetch('./sim_seeds/seed' + document.getElementById("builtInSeed").value + '.json')
-        .then((response) => response.json())
-        .then((data) => {
-            SpoilerJSON = data;
-            simActive = true;
-	
-            document.getElementById("simLog").style.display = "inline-block";
-            document.getElementById("simLog").value = "Starting with " + SpoilerJSON["locations"]["Song from Impa"] + " and " + SpoilerJSON["locations"]["Links Pocket"] + "\n";
-            document.getElementById("simCheckPedestal").style.display = "block";
-            document.getElementById("simCheckChildSpawn").style.display = "block";
-            document.getElementById("simCheckAdultSpawn").style.display = "block";
-            document.getElementById("gossips").value = "ON";
-	
-            if(SpoilerJSON["randomized_settings"]["starting_age"] == undefined) {
-                // if random starting age is not on, assume child vanilla spawn
-                document.getElementById("simLog").value = "Child Spawn: KF Links House\n" + document.getElementById("simLog").value;
-            }
-            else {
-                if(SpoilerJSON["randomized_settings"]["starting_age"] == "child")
-                    simCheckChildSpawn();
-                else
-                    simCheckAdultSpawn();
-            }
-            
-            document.getElementById("zeldasSpot").value = SpoilerItemToInput[SpoilerJSON["locations"]["Song from Impa"]];
-            simStartingReward();
-        })
-}
-
 function onChooseFile(event, onLoadFileHandler) {
     if (typeof window.FileReader !== 'function')
         throw ("The file API isn't supported on this browser.");
@@ -112,7 +89,7 @@ function simStartingReward() {
 	document.getElementById("markStones").value = s[0] + s[1] + s[2];
 }
 
-function simCheckPedestal() {
+function simCheckAltar() {
 	m = ["", "", "", "", "", ""];
 	s = ["", "", ""];
 	
@@ -139,8 +116,8 @@ function simCheckPedestal() {
 	document.getElementById("markMedallions").value = m[0] + m[1] + m[2] + m[3] + m[4] + m[5];
 	document.getElementById("markStones").value = s[0] + s[1] + s[2];
 	
-	document.getElementById("simLog").value = "Checked Pedestal\n" + document.getElementById("simLog").value;
-	document.getElementById("simCheckPedestal").style.display = "none";
+	document.getElementById("simLog").value = "Checked Altar\n" + document.getElementById("simLog").value;
+	document.getElementById("simCheckAltar").style.display = "none";
 }
 
 function simCheckChildSpawn() {
@@ -330,7 +307,7 @@ var LocationToSpoilerName = {
 	"redead_grave": "Graveyard Heart Piece Grave Chest",
 	"composers_grave": "Graveyard Royal Familys Tomb Chest",
 	"graveyard_box": "Graveyard Freestanding PoH",
-	"race_1": "Graveyard Hookshot Chest",
+	"race_1": "Graveyard Dampe Race Hookshot Chest",
 	"race_2": "Graveyard Dampe Race Freestanding PoH",
 	"river_pillar": "ZR Near Open Grotto Freestanding PoH",
 	"frogs_1": "ZR Frogs in the Rain",
