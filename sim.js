@@ -4,7 +4,8 @@ function onFileLoad(elementId, event) {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.log(error));
-    SpoilerJSON = JSON.parse(data);
+         SpoilerJSON = JSON.parse(data);
+   
     simActive = true;
 	
 	document.getElementById("simLog").style.display = "inline-block";
