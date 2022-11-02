@@ -7,6 +7,28 @@ function onFileLoad(elementId, event) {
             
             console.log(data)
             SpoilerJSON = data;
+            simActive = true;
+	
+            document.getElementById("simLog").style.display = "inline-block";
+            document.getElementById("simLog").value = "Starting with " + SpoilerJSON["locations"]["Song from Impa"] + " and " + SpoilerJSON["locations"]["Links Pocket"] + "\n";
+            document.getElementById("simCheckPedestal").style.display = "block";
+            document.getElementById("simCheckChildSpawn").style.display = "block";
+            document.getElementById("simCheckAdultSpawn").style.display = "block";
+            document.getElementById("gossips").value = "ON";
+	
+            if(SpoilerJSON["randomized_settings"]["starting_age"] == undefined) {
+                // if random starting age is not on, assume child vanilla spawn
+                document.getElementById("simLog").value = "Child Spawn: KF Links House\n" + document.getElementById("simLog").value;
+            }
+            else {
+                if(SpoilerJSON["randomized_settings"]["starting_age"] == "child")
+                    simCheckChildSpawn();
+                else
+                    simCheckAdultSpawn();
+            }
+            
+            document.getElementById("zeldasSpot").value = SpoilerItemToInput[SpoilerJSON["locations"]["Song from Impa"]];
+            simStartingReward();
         })
 
     simActive = true;
