@@ -3,14 +3,15 @@ function simControl() {
     fetch('./sim_seeds/seed' + document.getElementById("builtInSeed").value + '.json')
         .then((response) => response.json())
         .then((data) => {
-            readLog(data)
+            SpoilerJSON = data;
+            readLog();
         })
 }
 function onFileLoad(elementId, event) {
-	readLog(JSON.parse(event.target.result));
+    SpoilerJSON = JSON.parse(event.target.result);
+	readLog();
 }
-function readLog(SpoilerJSON) {
-    console.log(SpoilerJSON)
+function readLog() {
     simActive = true;
 	
 	document.getElementById("simLog").style.display = "inline-block";
