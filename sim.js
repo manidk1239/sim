@@ -1,7 +1,6 @@
 function onFileLoad(elementId, event) {
 	//SpoilerJSON = JSON.parse(event.target.result);
-    fetch('./sim_seeds/seed1.json', { 
-    fetch('./data.json')
+    fetch('./sim_seeds/seed1.json')
         .then((response) => response.json())
         .then((json) => SpoilerJSON = JSON.parse(json));
     time.sleep(5);
