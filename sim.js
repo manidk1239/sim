@@ -1,9 +1,10 @@
 function onFileLoad(elementId, event) {
-	//SpoilerJSON = JSON.parse(event.target.result);
+	SpoilerJSON = JSON.parse(event.target.result);
+    console.log(SpoilerJSON);
     fetch('./sim_seeds/seed1.json')
         .then((response) => response.json())
         .then((json) => SpoilerJSON = JSON.parse(json));
-    time.sleep(5);
+
     simActive = true;
 	
 	document.getElementById("simLog").style.display = "inline-block";
