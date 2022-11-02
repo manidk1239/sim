@@ -10,6 +10,7 @@ function onFileLoad(elementId, event) {
 	readLog(JSON.parse(event.target.result));
 }
 function readLog(SpoilerJSON) {
+    console.log(SpoilerJSON)
     simActive = true;
 	
 	document.getElementById("simLog").style.display = "inline-block";
