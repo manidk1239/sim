@@ -1,12 +1,10 @@
 function onFileLoad(elementId, event) {
 	//SpoilerJSON = JSON.parse(event.target.result);
     fetch('./sim_seeds/seed1.json', { 
-        method: 'GET'
-    })
-    .then(function(response) { return response.json(); })
-    .then(function(json) {
-        SpoilerJSON = JSON.parse(json)
-    });
+    fetch('./data.json')
+        .then((response) => response.json())
+        .then((json) => SpoilerJSON = JSON.parse(json));
+    time.sleep(5);
     simActive = true;
 	
 	document.getElementById("simLog").style.display = "inline-block";
