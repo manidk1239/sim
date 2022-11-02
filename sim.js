@@ -2,9 +2,8 @@ function onFileLoad(elementId, event) {
 	//SpoilerJSON = JSON.parse(event.target.result);
     fetch('./sim_seeds/seed1.json')
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => SpoilerJSON = JSON.parse(data))
         .catch(error => console.log(error));
-         SpoilerJSON = JSON.parse(data);
    
     simActive = true;
 	
