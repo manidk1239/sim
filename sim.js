@@ -23,8 +23,9 @@ function onFileLoad(elementId, event) {
 	document.getElementById("zeldasSpot").value = SpoilerItemToInput[SpoilerJSON["locations"]["Song from Impa"]];
 	simStartingReward();
 }
-function builtInSeed() {
-    fetch('./sim_seeds/seed1.json')
+function simControl() {
+    if (!document.getElementById("builtInSeed").value > 0) document.getElementById('fileInput').click(); return;
+    fetch('./sim_seeds/seed' + document.getElementById("builtInSeed").value + '.json')
         .then((response) => response.json())
         .then((data) => {
             SpoilerJSON = data;
